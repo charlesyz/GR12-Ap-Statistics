@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <iterator>
 #include <iostream>
-#define RUNS 1000000
+#define RUNS 100000
 using namespace std;
 
 typedef vector<int> vi;
@@ -35,50 +35,54 @@ void findComb(int offset, int k) {
 int main() {
     srand(time(NULL));
     // deck with cards ace to jack, jack = 0
-    vi deck = {1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,0,0,0,0};
-    int count = 0;
-    for (int r = 0; r < RUNS; r++){
 
-        random_device rd;
-        mt19937 g(rd());
+    for (int p = 0; p < 20; p++){
+        vi deck = {1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9,
+                   9, 10, 10, 10, 10, 0, 0, 0, 0};
+        int count = 0;
+        for (int r = 0; r < RUNS; r++) {
 
-        // shuffle the deck
-        shuffle(deck.begin(), deck.end(), g);
+            random_device rd;
+            mt19937 g(rd());
 
-        // reset the chosen 5 cards and the combinations
-        cards = {};
-        temp = {};
-        combinations = {};
+            // shuffle the deck
+            shuffle(deck.begin(), deck.end(), g);
 
-        // get the combinations of k cards from the first n cards in the deck
-        int n = 5, k = 3;
+            // reset the chosen 5 cards and the combinations
+            cards = {};
+            temp = {};
+            combinations = {};
 
-        // put the first 5 cards in the deck into "cards"
-        for (int i = 0; i < n; ++i) {
-            cards.push_back(deck[i]);
-        }
-        cNum = 0;
-        // find all possible combinations of 3 cards
-        findComb(0, k);
+            // get the combinations of k cards from the first n cards in the deck
+            int n = 4, k = 3;
 
-        for (int i = 0; i < combinations.size(); i++){
-            int sum = 0;
-            for (int j = 0; j < k; j++){
-                sum += combinations[i][j];
+            // put the first 5 cards in the deck into "cards"
+            for (int i = 0; i < n; ++i) {
+                cards.push_back(deck[i]);
             }
-            if (sum == 0 || sum == 1 || sum == 2 || sum == 28 || sum == 29 || sum == 30){
-                count++;
-                //cout << "SUM TO: " << sum << " ON COMBINATION: " << i + 1 << endl;
-                // break to avoid double counting
-                break;
+            cNum = 0;
+            // find all possible combinations of 3 cards
+            findComb(0, k);
+
+            for (int i = 0; i < combinations.size(); i++) {
+                int sum = 0;
+                for (int j = 0; j < k; j++) {
+                    sum += combinations[i][j];
+                }
+                if (sum == 0 || sum == 1 || sum == 2 || sum == 28 || sum == 29 || sum == 30) {
+                    count++;
+                    //cout << "SUM TO: " << sum << " ON COMBINATION: " << i + 1 << endl;
+                    // break to avoid double counting
+                    break;
+                }
+
             }
 
+
         }
-
-
+        //cout << count << endl;
+        cout << (float) count / RUNS << endl;
     }
-    cout << count << endl;
-    cout << (float)count / RUNS << endl;
     return 0;
 }
 
