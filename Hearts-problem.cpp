@@ -1,3 +1,6 @@
+// Program that finds the probability that a hand of 13 cards
+// from a regular deck of 52 contains 5 face cards, two aces, and at least 6 hearts
+// Made for Grade 12 AP Statistics
 #include <random>
 #include <algorithm>
 #include <iterator>
@@ -26,9 +29,11 @@ int main() {
     }*/
 
     for (int q = 0; q < 500; q++){
-
+        
+        // number of hands that fit the criteria 
         int count = 0;
-
+        
+        // simulate RUNS number of hands
         for (int p = 0; p < RUNS; p++){
 
             random_device rd;
