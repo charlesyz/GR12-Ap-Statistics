@@ -1,3 +1,6 @@
+// Program that finds the probability that a hand of 5 cards in a deck of 44 
+// (aces through jacks only, where jacks represent zero)will contain three cards that sum to 0,1,2,28,28,or 30
+// Made for the AP Statistics grade 12 Casino Summative
 #include <random>
 #include <algorithm>
 #include <iterator>
